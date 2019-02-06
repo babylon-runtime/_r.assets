@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Cornell box - Standard workflow</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/styles.css" media="screen" />
+    <script src="js/babylon.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript">
+        BABYLON.DebugLayer.InspectorURL = "js/babylon.inspector.bundle.js";
+        var canvas = document.getElementById("canvas");
+        var engine = new BABYLON.Engine(canvas, true);
+        var scene = new BABYLON.Scene(engine);
+        scene.clearColor = BABYLON.Color3.Black();
+        scene.ambientColor = BABYLON.Color3.White();
+        var uniformNumber = 1; //just to help in some Vector3 or Color3 operations
+
+        // Add a camera to the scene and attach it to the canvas
+        var universalCamera = new BABYLON.UniversalCamera("universalCamera", new BABYLON.Vector3(0, 1, 0), scene);
+        universalCamera.speed = 0.1;
+        universalCamera.fov = 1.2;
+        universalCamera.minZ = 0.01;
+        universalCamera.position = new BABYLON.Vector3(0, 1.5, -4);
+        universalCamera.rotation = BABYLON.Vector3.Zero();
+        scene.activeCamera = universalCamera;
+        scene.activeCamera.attachControl(canvas);
+
+        var spotlight = new BABYLON.PointLight("pointlight", new BABYLON.Vector3(0, 3, 0), scene);
+
+        function assignLightmapOnMaterial(material, lightmap) {
+            material.lightmapTexture = lightmap;
+            // lightmap as shadow
+            material.useLightmapAsShadowmap = true;
+        }
+
+        BABYLON.SceneLoader.ImportMesh(
+            null,
+            "assets/",
+            "cornellBox-2.80-Eevee-babylon-standardWorkflow.babylon",
+            scene,
+            function () {
+                // lightmaps assignation
+                var lightmappedObjects = [
+                    "cornellBox.000",
+                    "bloc.000",
+                    "suzanne.000"
+                ];
+                lightmappedObjects.forEach(function (objectName) {
+                    var lightmap = new BABYLON.Texture(
+                        "assets/LM/lightmap_" + objectName + "_DIFFUSE.png",
+                        scene,
+                        false,
+                        false
+                    );
+                    lightmap.onLoadObservable.addOnce(function () {
+                        lightmap.name = objectName + ".LM";
+                        // using UV2
+                        lightmap.coordinatesIndex = 1;
+                        lightmap.vScale = -1;
+                        var mesh = scene.getMeshByName(objectName);
+                        if (mesh && mesh.getClassName() == "Mesh") {
+                            if (mesh.material && !mesh.material.subMaterials) {
+                                // mesh only have one material
+                                assignLightmapOnMaterial(mesh.material, lightmap);
+                            } else if (mesh.material.subMaterials) {
+                                // mesh have multiMaterials
+                                mesh.material.subMaterials.forEach(function (subMat) {
+                                    assignLightmapOnMaterial(subMat, lightmap);
+                                });
+                            }
+                        }
+                    });
+                });
+                var logoRoot = scene.getNodeByName("BJS-3D-logo.root.000");
+                logoRoot.getChildren().forEach(function(mesh){
+                    mesh.material.ambientColor = BABYLON.Color3.Black();
+                });
+                var timer = 0;
+                var rotationInterval = setInterval(function () {
+                    logoRoot.position.y = 1.5 + Math.cos(timer) * 0.25;
+                    logoRoot.rotation.y = timer;
+                    timer += 0.01;
+                }, 25);
+            }
+        );
+
+        engine.runRenderLoop(function () { // Register a render loop to repeatedly render the scene
+            scene.render();
+        });
+
+        window.addEventListener("resize", function () { // Watch for browser/canvas resize events
+            engine.resize();
+        });
+    </script>
+</body>
+
+</html>
