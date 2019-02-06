@@ -1,5 +1,5 @@
 {"producer":{"name":"Blender","version":"2.79 (sub 0)","exporter_version":"5.6.4","file":"cornellBox_2_79_BlenderRender_babylon.babylon"},
-"autoClear":true,"clearColor":[0.0509,0.0509,0.0509],"ambientColor":[1,1,1],"gravity":[0,-9.81,0],
+"autoClear":true,"clearColor":[0.0509,0.0509,0.0509],"ambientColor":[0.0509,0.0509,0.0509],"gravity":[0,-9.81,0],
 "materials":[{"name":"cornellBox_2_79_BlenderRender_babylon.bloc.000","id":"cornellBox_2_79_BlenderRender_babylon.bloc.000","ambient":[1,1,1],"diffuse":[1,1,1],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4, 
 "diffuseTexture":{"name":"checkerBJS.png","level":1,"hasAlpha":1,"coordinatesMode":0,"uOffset":0,"vOffset":0,"uScale":1,"vScale":1,"uAng":0,"vAng":0,"wAng":0,"wrapU":1,"wrapV":1,"coordinatesIndex":0}},
 {"name":"cornellBox_2_79_BlenderRender_babylon.suzanne.000","id":"cornellBox_2_79_BlenderRender_babylon.suzanne.000","ambient":[0.35,0.35,0.35],"diffuse":[0.35,0.35,0.35],"specular":[0,0,0],"emissive":[0,0,0],"specularPower":50,"alpha":1,"backFaceCulling":true,"checkReadyOnlyOnce":false,"maxSimultaneousLights":4, 
