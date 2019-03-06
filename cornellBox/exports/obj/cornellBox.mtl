@@ -20,7 +20,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-refl ..\\..\\..\\3D\\Textures\\spheremap.png
+refl ..\\..\\3D\\Textures\\spheremap.png
 
 newmtl BJS-3D-logo_blue03.000
 Ns 27.450980
@@ -71,7 +71,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd ..\\..\\..\\3D\\Textures\\checkerBJS.png
+map_Kd ..\\..\\3D\\Textures\\checkerBJS.png
 
 newmtl cornellBox.default.000
 Ns 96.078431
@@ -102,7 +102,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd ..\\..\\..\\3D\\Textures\\checker-meter.png
+map_Kd ..\\..\\3D\\Textures\\checker-meter.png
 
 newmtl cornellBox.red.000
 Ns 96.078431
@@ -153,4 +153,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-refl ..\\..\\..\\3D\\Textures\\spheremap.png
+refl ..\\..\\3D\\Textures\\spheremap.png
