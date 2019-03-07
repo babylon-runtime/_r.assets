@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-    <title>_runtime - launch 01</title>
+    <title>_runtime - patch 01</title>
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://unpkg.com/babylon-runtime/dist/_r.js"></script>
 </head>
@@ -11,7 +11,8 @@
         _r.launch({
             assets : "assets/",
             scene : "cornellBox.babylon",
-            activeCamera : "Camera"
+            activeCamera : "Camera",
+            patch: "assets/visual-tweaks.patch"
         });
     </script>
 </body>
