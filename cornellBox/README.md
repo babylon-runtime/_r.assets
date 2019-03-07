@@ -2,6 +2,8 @@
 
 (forked from [vinc3r cornellBox](https://github.com/Vinc3r/cornellBox))
 
+![thumbnail](README/thumbnail.png)
+
 ## 3D
 
 Sources files for cornell box scene.
