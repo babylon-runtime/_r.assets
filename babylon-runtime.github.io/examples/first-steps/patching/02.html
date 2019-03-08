@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-    <title>_runtime - launch 01</title>
+    <title>_runtime - patch 01</title>
     <style>
         html, body {
             overflow: hidden;
@@ -13,14 +13,16 @@
         }
     </style>
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
-    <script src="https://unpkg.com/babylon-runtime/dist/_r.js"></script>
+    <!-- <script src="https://unpkg.com/babylon-runtime/dist/_r.js"></script> -->
+    <script src="https://unpkg.com/babylon-runtime@0.0.4/dist/_r.js"></script> <!-- temp solution waiting for unpkg to update, same in codepen -->
 </head>
 <body>
     <script type="text/javascript">
         _r.launch({
             assets : "assets/",
             scene : "cornellBox.babylon",
-            activeCamera : "Camera"
+            activeCamera : "Camera",
+            patch: ["assets/visual-tweaks02.patch"]
         });
     </script>
 </body>
