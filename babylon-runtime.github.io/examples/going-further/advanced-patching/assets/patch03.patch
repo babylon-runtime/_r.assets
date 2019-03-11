@@ -1,0 +1,6 @@
+[{
+    "*3D-logo*:mesh": {
+        "showBoundingBox": true,
+        "scalingDeterminant": 2
+    }
+}]
