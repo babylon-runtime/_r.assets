@@ -1,6 +1,6 @@
 [{
         "cornellBox.cornellBox.ground.000": {
-            "diffuseColor": new BABYLON.Color3(0.2, 0.2, 0.8)
+            "diffuseColor": new BABYLON.Color3(0.2, 0.2, 0.8) /* #3232C8 */
         }
     },
     {

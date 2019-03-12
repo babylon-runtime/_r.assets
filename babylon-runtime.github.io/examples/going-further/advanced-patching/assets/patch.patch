@@ -1,6 +1,6 @@
 [{
     "*": {
-        "diffuseColor": new BABYLON.Color3(0.2, 0.2, 0.8),
-        "emissiveColor": new BABYLON.Color3(0.2, 0.2, 0.8)
+        "diffuseColor": new BABYLON.Color3(0.2, 0.2, 0.8),  /* #3232C8 */
+        "emissiveColor": new BABYLON.Color3(0.2, 0.2, 0.8) /* #3232C8 */
     }
 }]
