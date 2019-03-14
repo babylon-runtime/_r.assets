@@ -18,15 +18,13 @@
 <body>
     <script type="text/javascript">
         _r.launch({
-            assets : "assets/",
-            scene : "cornellBox.babylon",
+            scene : "assets/cornellBox.babylon",
             activeCamera : "Camera",
             patch: ["assets/patch.patch"]
         });
 
         _r.ready(function(){
             console.log("scene is loaded & patched!");
-            _r("*logo*:mesh")
         });
 
     </script>
