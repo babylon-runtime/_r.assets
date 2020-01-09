@@ -1,0 +1,44 @@
+[
+    /* mesh tweaking */
+
+    {
+        "_collisions": {
+            isVisible: false,
+        }
+    },
+
+    /* material tweaking */
+
+    {
+        "*lampFabric01.*": {
+            diffuseColor: "black",
+            ambientColor: "black",
+            emissiveColor: [0.47, 0.28,
+                0.07
+            ], // in combination with emissiveTexture
+            useEmissiveAsIllumination: true, // we want light to burn
+        }
+    },
+    {
+        "*lampBulb01.*": {
+            emissiveColor: "#ffffff",
+        }
+    },
+    {
+        "*lampMetal01.*": {
+            diffuseColor: "black",
+            ambientColor: "#222222",
+            specularColor: [0.88, 0.59, 0.41],
+            specularPower: 80,
+        }
+    },
+    {
+        "*holdout.*": {
+            disableLighting: true,
+        }
+    }, {
+        "*floor01.*, *books01.*": {
+            invertNormalMapX: true,
+        }
+    },
+]
