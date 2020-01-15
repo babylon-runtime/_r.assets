@@ -34,9 +34,25 @@
 
         _r.ready(function () {
 
+            BABYLON.DebugLayer.InspectorURL = "js/babylon.inspector.bundle.js";
+            _r.scene.debugLayer.show({overlay: true, embedMode: true, enablePopup: true});
+
             _r.activateCamera("arcRotateCamera");
 
             /** LIGHTMAP ASSIGNATION PROCESS **/
+/*
+            _r.patch([{
+                    "wallz.000:mesh": {
+                        "material": {
+                            "*":{
+                            "lightmapTexture": _r.load("assets/lightmaps/wallz.000_LM.jpg")
+                        }
+                        }
+                    }
+                }
+            ]);
+*/
+            /*
 
             function assignLightmapOnMaterial(material, lightmap) {
                 material.lightmapTexture = lightmap;
@@ -71,6 +87,9 @@
                     }
                 }
             }
+
+            */
+
         });
     </script>
 </body>
