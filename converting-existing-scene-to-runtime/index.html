@@ -47,10 +47,10 @@
 
             _r.select("*wall*:material").log("name")
             
-            _r.patch([{
-                "*wall01*:material": {
-                    "lightmapTexture": function () {
-                        return _r.load("assets/lightmaps/wallz.000_LM.jpg");
+             _r.patch([{
+                "*wallz*:mesh, *furnitures.000:mesh": {
+                    "lightmapTexture": function (mesh) {
+                        return _r.load.texture("assets/lightmaps/" + mesh.name + "_LM.jpg");
                     }
                 }
             }]);
