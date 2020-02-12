@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>submat bug report</title>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="white">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!-- BabylonJS -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://cdn.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://cdn.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://cdn.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+
+    <!-- _runtime -->
+    <script src="https://unpkg.com/babylon-runtime@latest/_r.min.js"></script>
+
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var cyclingThroughMeshes = true; // false = through material, for checking
+
+        _r.launch({
+            scene: "assets/scene.babylon",
+            patch: [{
+                // just for readability
+                "*babylon*:mesh": {
+                    "position": {
+                        "x": 1.1
+                    }
+                }
+            }],
+            beforeFirstRender: function () {
+                _r.scene.createDefaultCamera();
+                _r.load("assets/scene.glb").then(function (assets) {
+                    _r.patch([{
+                        // just for readability
+                        "*gltf*:mesh": {
+                            "position": {
+                                "x": 1.1
+                            }
+                        }
+                    }]);
+                    _r.select(assets).addToScene();
+                    _r.scene.createDefaultCamera(true, true, true);
+                    _r.scene.createDefaultEnvironment({
+                        createGround: false,
+                        createSkybox: false
+                    });
+                    _r.scene.activeCamera.beta = 0.5;
+                });
+            }
+        });
+        _r.ready(function () {
+            _r.scene.debugLayer.show({
+                overlay: true,
+                embedMode: true,
+                enablePopup: true
+            });
+
+            if (cyclingThroughMeshes) {
+                _r.patch(["cycling-through-meshes.patch"]);
+            } else {
+                _r.patch(["cycling-through-materials.patch"]);
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>
