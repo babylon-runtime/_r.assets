@@ -1,7 +1,0 @@
-[{
-    "*:material": {
-        "albedoTexture": function () {
-            return _r.load.texture("assets/checker.jpg");
-        }
-    }
-}]
