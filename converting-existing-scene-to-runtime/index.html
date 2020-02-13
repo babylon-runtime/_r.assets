@@ -45,8 +45,7 @@
 
             /** LIGHTMAP ASSIGNATION PROCESS **/
 
-            _r.select("*wall*:material").log("name")
-            
+            /*           
              _r.patch([{
                 "*wallz*:mesh, *furnitures.000:mesh": {
                     "lightmapTexture": function (mesh) {
@@ -54,7 +53,53 @@
                     }
                 }
             }]);
+*/
 
+            _r.patch([{
+                "*wall*:mesh": {
+                    material: {
+                        subMaterials: {
+                            "*": {
+                                "lightmapTexture": function (submtl, test2, test3) {
+                                    console.log("yep yep yep", submtl, test2, test3)
+                                    return _r.load.texture("assets/lightmaps/wallz.000_LM.jpg", {
+                                        coordinatesIndex: 1
+                                    });
+                                },
+                                "useLightmapAsShadowmap": true
+                            }
+                        }
+                    }
+                }
+            }]);
+
+            /*
+                                    _r.patch([{
+                                        "*wall*:material": {
+                                            "lightmapTexture": function () {
+                                                return _r.load.texture("assets/lightmaps/wallz.000_LM.jpg", {
+                                                    coordinatesIndex: 1
+                                                });
+                                            },
+                                            "useLightmapAsShadowmap": true
+                                        }
+                                    }]);
+
+            */
+            /*
+                        _r.load.texture("assets/lightmaps/wallz.000_LM.jpg", {
+                            coordinatesIndex: 1
+                        }).then(function (texture) {
+                            _r.patch([{
+                                "*wall*:material": {
+                                    "lightmapTexture": function () {
+                                        return texture
+                                    },
+                                    "useLightmapAsShadowmap": true
+                                }
+                            }]);
+                        });
+            */
             /*
 
             function assignLightmapOnMaterial(material, lightmap) {
