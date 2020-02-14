@@ -96,7 +96,7 @@
                     }
                 }
                 /** END OF LIGHTMAP ASSIGNATION PROCESS **/
-                
+
                 /* mesh tweaking */
 
                 var collisions = scene.getMeshByName("_collisions");
@@ -107,7 +107,8 @@
                 var lampFabric = scene.getMaterialByName("scene_BJS.lampFabric01.000");
                 lampFabric.diffuseColor = BABYLON.Color3.Black();
                 lampFabric.ambientColor = BABYLON.Color3.Black();
-                lampFabric.emissiveColor = new BABYLON.Color3(0.47, 0.28, 0.07); // in combination with emissiveTexture
+                lampFabric.emissiveColor = new BABYLON.Color3(0.47, 0.28,
+                0.07); // in combination with emissiveTexture
                 lampFabric.useEmissiveAsIllumination = true; // we want light to burn
 
                 var lampBulb = scene.getMaterialByName("scene_BJS.lampBulb01.000");
@@ -129,7 +130,8 @@
                 books01.invertNormalMapX = true;
 
                 /* tools */
-                
+
+                //BABYLON.DebugLayer.InspectorURL = "js/babylon.inspector.bundle.js";
                 //scene.debugLayer.show();
             }
         );
