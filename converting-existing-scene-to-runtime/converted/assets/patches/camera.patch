@@ -1,11 +1,10 @@
 [{
         "exec": function () {
-            // we can do the code we want here,
-            // but be sure to "return" the camera object
-            return new BABYLON.ArcRotateCamera(
+            // we can do the code we want here
+            new BABYLON.ArcRotateCamera(
                 "arcRotateCamera",
                 1, 1, 1, BABYLON.Vector3.Zero(),
-                _r.scene);
+                _r.scene); // don't forget the _r as prefix
         }
     },
     {
@@ -30,6 +29,12 @@
             lowerBetaLimit: 0,
             upperBetaLimit: 1.8,
             upperRadiusLimit: 7,
+        }
+    },
+    {
+        "exec": function () {
+            // now activating the camera
+            _r.activateCamera("arcRotateCamera");
         }
     }
 ]
