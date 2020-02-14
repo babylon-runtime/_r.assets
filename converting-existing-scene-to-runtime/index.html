@@ -45,98 +45,26 @@
 
             /** LIGHTMAP ASSIGNATION PROCESS **/
 
-            /*           
-             _r.patch([{
-                "*wallz*:mesh, *furnitures.000:mesh": {
-                    "lightmapTexture": function (mesh) {
-                        return _r.load.texture("assets/lightmaps/" + mesh.name + "_LM.jpg");
-                    }
-                }
-            }]);
-*/
-
-            _r.patch([{
-                "*wall*:mesh": {
-                    material: {
-                        subMaterials: {
-                            "*": {
-                                "lightmapTexture": function (submtl, test2, test3) {
-                                    console.log("yep yep yep", submtl, test2, test3)
-                                    return _r.load.texture("assets/lightmaps/wallz.000_LM.jpg", {
-                                        coordinatesIndex: 1
-                                    });
-                                },
-                                "useLightmapAsShadowmap": true
-                            }
+            const meshesNames = ["wallz.000", "furnitures.000"]; // lightmapped meshes
+            meshesNames.forEach(function (lightmappedMesh) {
+                // we first load the texture, based on name convention
+                _r.load.texture("assets/lightmaps/" + lightmappedMesh + "_LM.jpg", {
+                    "coordinatesIndex": 1 // let's patch so it use UV2
+                }).then(function (lightmap) {
+                    // now the texture is ready, we can assign it
+                    _r.select("*" + lightmappedMesh + "*:mesh").forEach(function (mesh) {
+                        const material = mesh.material;
+                        // in case of multimat, we have to cycle through it
+                        if (material.getClassName() === "MultiMaterial") {
+                            material.subMaterials.forEach(function (subMaterial) {
+                                subMaterial.lightmapTexture = lightmap;
+                            });
+                        } else {
+                            material.lightmapTexture = lightmap;
                         }
-                    }
-                }
-            }]);
-
-            /*
-                                    _r.patch([{
-                                        "*wall*:material": {
-                                            "lightmapTexture": function () {
-                                                return _r.load.texture("assets/lightmaps/wallz.000_LM.jpg", {
-                                                    coordinatesIndex: 1
-                                                });
-                                            },
-                                            "useLightmapAsShadowmap": true
-                                        }
-                                    }]);
-
-            */
-            /*
-                        _r.load.texture("assets/lightmaps/wallz.000_LM.jpg", {
-                            coordinatesIndex: 1
-                        }).then(function (texture) {
-                            _r.patch([{
-                                "*wall*:material": {
-                                    "lightmapTexture": function () {
-                                        return texture
-                                    },
-                                    "useLightmapAsShadowmap": true
-                                }
-                            }]);
-                        });
-            */
-            /*
-
-            function assignLightmapOnMaterial(material, lightmap) {
-                material.lightmapTexture = lightmap;
-                // we want using UV2
-                material.lightmapTexture.coordinatesIndex = 1;
-                // our lightmap workflow is a darken one
-                material.useLightmapAsShadowmap = true;
-            }
-
-            // lightmapped meshes list
-            var lightmappedMeshes = ["wallz.000", "furnitures.000"];
-            // we start cycling through them
-            for (var i = 0; i < lightmappedMeshes.length; i++) {
-                var currentMesh = _r.scene.getMeshByName(lightmappedMeshes[i]);
-                // lightmap loading
-                var currentMeshLightmap = new BABYLON.Texture(
-                    "assets/lightmaps/" + currentMesh.name + "_LM.jpg",
-                    _r.scene
-                );
-                currentMeshLightmap.name = currentMesh.name + "_LM";
-                // we start cycling through each mesh material(s)
-                if (!currentMesh.material) {
-                    // no material so skipping
-                    continue;
-                } else if (!currentMesh.material.subMaterials) {
-                    // no subMaterials
-                    assignLightmapOnMaterial(currentMesh.material, currentMeshLightmap);
-                } else if (currentMesh.material.subMaterials) {
-                    // we cycle through subMaterials
-                    for (var j = 0; j < currentMesh.material.subMaterials.length; j++) {
-                        assignLightmapOnMaterial(currentMesh.material.subMaterials[j], currentMeshLightmap);
-                    }
-                }
-            }
-
-            */
+                    });
+                });
+            });
 
         });
     </script>
