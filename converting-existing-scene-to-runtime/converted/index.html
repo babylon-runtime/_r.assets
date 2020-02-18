@@ -9,17 +9,25 @@
     <script src="js/_r.min.js"></script>
     <script src="js/lightmaps.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/loadingScreen.css" />
 </head>
 
 <body>
     <script type="text/javascript">
+
+        _r.loadingScreen.iframe("loadingScreen.html");
+        
         _r.launch({
             scene: "assets/scene-BJS.babylon",
             patch: [
                 "assets/patches/scene.patch",
                 "assets/patches/camera.patch",
                 "assets/patches/tweaks.patch",
-            ]
+            ],
+            progress: function (evt) {
+                var progress = parseInt(Math.abs((100 * evt.loaded) / evt.total));
+                _r.loadingScreen.progress = progress;
+            }
         });
 
         _r.ready(function () {
