@@ -8,15 +8,15 @@
     <script src="js/pep.min.js"></script>
     <script src="js/_r.min.js"></script>
     <script src="js/lightmaps.js"></script>
+    <script src="js/interactions.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <link rel="stylesheet" type="text/css" href="css/loadingScreen.css" />
 </head>
 
 <body>
     <script type="text/javascript">
-
         _r.loadingScreen.iframe("loadingScreen.html");
-        
+
         _r.launch({
             scene: "assets/scene-BJS.babylon",
             patch: [
@@ -34,8 +34,35 @@
 
             /** LIGHTMAP ASSIGNATION PROCESS **/
 
-            const lightmappedMeshes = ["furnitures.000", "wallz.000"]; // lightmapped meshes
-            assignLightmapsToMeshes(lightmappedMeshes);
+            window.lightmappedMeshes = ["furnitures.000", "wallz.000"]; // lightmapped meshes
+            var lightmapsNumber = 0;
+            window.currentLampStatus = true; // lamp is on by default
+            // lightmapSet below will help to access our lightmap from anywhere
+            window.lightmapSet = {};
+            lightmapSet.on = {};
+            lightmapSet.off = {};
+
+            lightmappedMeshes.forEach(function (currentMeshName) {
+                ["", "-off"].forEach(function (
+                status) { // we need texture naming convention according to lighting set
+                    _r.load.texture("assets/lightmaps/" + currentMeshName + "_LM" + status +
+                        ".jpg", {
+                            "coordinatesIndex": 1
+                        }).then(function (lightmap) {
+                        // adding texture to our global variable
+                        if (status == "-off") {
+                            lightmapSet.off[currentMeshName] = lightmap;
+                        } else {
+                            lightmapSet.on[currentMeshName] = lightmap;
+                        }
+                        //check if all our textures are loaded, if so, assigning them
+                        lightmapsNumber++;
+                        if (lightmapsNumber == (lightmappedMeshes.length * 2)) {
+                            assignLightmapsToMeshes(lightmappedMeshes);
+                        }
+                    });
+                });
+            });
 
             /* tools */
 

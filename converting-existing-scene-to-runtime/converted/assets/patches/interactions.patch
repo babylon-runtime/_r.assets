@@ -1,0 +1,12 @@
+[{
+        "_interact*:mesh": {
+            "visibility": 0
+        }
+    },
+    {
+        "_interact*:material": {
+            "unlit": "true",
+            "disableLighting": "true"
+        }
+    }
+]
